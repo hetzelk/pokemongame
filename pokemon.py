@@ -2,27 +2,9 @@ import time, os, random
 from pokedex import * 
 
 
-class Character:
-    def __init__(self, health):
-        self.health = health
-
-    def attack(self, other):
-        raise NotImplementedError
 
 
-class Player1(Character):
-    def __init__(self, health=100):
-        super().__init__(health)
-
-
-class Player2(Character):
-    def __init__(self, health=100):
-        super().__init__(health)
-
-
-
-
-class Pokemon(object):
+class Pokemon:
     def __init__(self):
         name = str(input("What is your name? "))
         self.name = name
@@ -71,27 +53,56 @@ class Pokemon(object):
         pokemon = self.pokedict
         return pokemon['move3']
 
-
-
-
-
 """
-
-class Status():
-    def __init__(self, name, health, oaklabchoice):
-        self.name = name
+class Character:
+    def __init__(self, health):
         self.health = health
-        self.pokemon = oaklabchoice
-    def __str__(self):
-        return "{} - {} \nHealth: {}\n".format(self.name, self.pokemon, self.health)
 
-class Enemy(Status):
-    def __init__(self):
-        self.name = "Will"
-        self.health = "100"
-        self.pokemon = "Blastoise"
-        #super().__init__(name = "Hydrogen", health = "H", pokemon = "1")
+    def attack(self, other):
+        raise NotImplementedError
 """
+
+class Player1(Pokemon):
+    def __init__(self, health=100):
+        super().__init__(health)
+
+
+class Player2(Pokemon):
+    def __init__(self, health=100):
+        super().__init__(health)
+
+
+
+
+
+
+
+
+
+def battle(Player1, Player2):
+    print("Opponent wants to battle!")
+    print("Opponent sent", pokemon)
+    while player1.health > 0 and player2.health > 0:
+        
+        player1.attack(player2)
+        if player2.health <= 0:
+            break
+        print(player2, "2You have 0 health!")
+
+        player2.attack(player1)
+        if player1.health <= 0:
+            break
+        print(player1, "1You have 0 health!")
+
+
+
+    if player1.health > 0:
+        print(player1,", you defeated",player2,"!")
+    if player2.health > 0:
+        print(player2,", you were defeated",player1,"!")
+
+
+
 
 
 def showpokemonascii():
@@ -121,6 +132,7 @@ def main():
     print("")
     print("Move 1:",star.move1,"- Move 2:",star.move2,"- Move 3:",star.move3)
     print("")
+    battle(Player1(), Player2())
 
 
 os.system("cls")
