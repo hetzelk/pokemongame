@@ -38,7 +38,7 @@ class Pokemon(object):
         print("B for Balbasaur, Grass-Type")
         print("C for Charmander, Fire-Type")
         print("S for Squirtle, Water-Type")
-        pokechoice = str(input('"B," "C," or "S." Make your choice. ')).upper()
+        pokechoice = str(input('B, C, or S. Make your choice. ')).upper()
 
         if pokechoice == "B":
             return balbasaur   
@@ -46,9 +46,10 @@ class Pokemon(object):
             return charmander
         if pokechoice == "S":
             return squirtle
-        else:
+        elif pokechoice != "B" or "C" or "S":
             print("Please try again, B, C, or S. ")
-            self.oaklabchoice()
+            print("")
+            return self.oaklabchoice()
 
     def getname(self):
         pokemon = self.pokedict
@@ -93,19 +94,38 @@ class Enemy(Status):
 """
 
 
+def showpokemonascii():
+    print(" ____       _                              ")
+    print("|  _ \ ___ | | _____ _ __ ___   ___  _ __  ")
+    print("| |_) / _ \| |/ / _ \ '_ ` _ \ / _ \| '_ \ ")
+    print("|  __/ (_) |   <  __/ | | | | | (_) | | | |")
+    print("|_|   \___/|_|\_\___|_| |_| |_|\___/|_| |_|")
+    print("")
 
+def intro():
+    print("Welcome to the pokemon world.")
+    print("There are 3 difficulty levels.")
+    print("You can face the computer or a friend.")
+    print("You take turns with your opponent.")
+    print("You have 3 different moves you can choose from.")
+    print("")
+    print("")
 
 def main():
+    os.system("cls")
+    print(" ____       _                              ")
+    print("|  _ \ ___ | | _____ _ __ ___   ___  _ __  ")
+    print("| |_) / _ \| |/ / _ \ '_ ` _ \ / _ \| '_ \ ",star.name)
+    print("|  __/ (_) |   <  __/ | | | | | (_) | | | |",star.pokemon)
+    print("|_|   \___/|_|\_\___|_| |_| |_|\___/|_| |_|",star.health)
     print("")
-    print("Your name is:",star.name)
-    print("You chose:",star.pokemon)
-    print("It's health:",star.health)
-    print("Move 1:",star.move1)
-    print("Move 2:",star.move2)
-    print("Move 3:",star.move3)
+    print("Move 1:",star.move1,"- Move 2:",star.move2,"- Move 3:",star.move3)
+    print("")
 
 
-
+os.system("cls")
+showpokemonascii()
+intro()
 star = Pokemon()
 main()
 
