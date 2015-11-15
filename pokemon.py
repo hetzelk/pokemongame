@@ -25,37 +25,37 @@ def multiplayer():
     print("Would you like to play against the computer or a rival?")
     print("[1] - Vs. Computer")
     print("[2] - Vs. Rival")
-    multiplayerchoice = int(input("Select: "))
-    if multiplayerchoice == 1:
+    multiplayerchoice = str(input("Select: "))
+    if multiplayerchoice == "1":
         return 1
-    elif multiplayerchoice ==2:
+    elif multiplayerchoice == "2":
         return 2
     else:
         print("Please enter the right option. 1 or 2? ")
         print("")
-        return difficulty()
+        return multiplayer()
 
 def difficulty():
     print("Please select a difficulty.")
     print("[1]00, Health")
     print("[2]00, Health")
     print("[3]00, Health")
-    difchoice = int(input("Level 1, 2, or 3? "))
+    difchoice = str(input("Level 1, 2, or 3? "))
 
-    if difchoice == 1:
+    if difchoice == "1":
         return difficulty1   
-    elif difchoice == 2:
+    elif difchoice == "2":
         return difficulty2
-    elif difchoice == 3:
+    elif difchoice == "3":
         return difficulty3
         """
-    elif difchoice == 4:
+    elif difchoice == "4":
         return difficulty2
-    elif difchoice == 5:
+    elif difchoice == "5":
         return difficulty3
-    elif difchoice == 10:
+    elif difchoice == "10":
         return difficulty2
-    elif difchoice == 100:
+    elif difchoice == "100":
         return difficulty3"""
 
     else:
@@ -86,18 +86,15 @@ class Player(Character):
         self.pokechoice = 0
         self.health = 0
         self.battlehealth = 0
-        self.move1 = 0
-        self.move2 = 0
-        self.move3 = 0
-        self.move1amount = 0
-        self.move2amount = 0
-        self.move3amount = 0
+        self.move1name = 0
+        self.move2name = 0
+        self.move3name = 0
 
     def getplayername(self):
         if multiplayer == 1:
-            self.playername = input("Please enter your name. ")
+            self.playername = input("Please enter your name. ".title())
         else:
-            self.playername = input("Player 1 enter your name. ")
+            self.playername = input("Player 1 enter your name. ".title())
 
     def getnamechoices(self):
         chardict = self.difficulty
@@ -145,40 +142,40 @@ class Player(Character):
         self.battlehealth = pokemon['health']
     def getmove1(self):
         pokemon = self.pokedict
-        self.move1 = pokemon['move1name']
+        self.move1name = pokemon['move1name']
     def getmove2(self):
         pokemon = self.pokedict
-        self.move2 = pokemon['move2name']
+        self.move2name = pokemon['move2name']
     def getmove3(self):
         pokemon = self.pokedict
-        self.move3 = pokemon['move3name']
+        self.move3name = pokemon['move3name']
 
 
     def attack(self, other):
         pokemon = self.pokedict
         
         print(self.playername, "current health is:", self.battlehealth)
-        print("[1]", self.move1)
-        print("[2]", self.move2)
-        print("[3]", self.move3)
+        print("[1]", self.move1name)
+        print("[2]", self.move2name)
+        print("[3]", self.move3name)
         attacks = str(input("Select a move: "))
 
         if attacks == "1":
-            print(self.playername, "used", self.move1)
+            print(self.playername, "used", self.move1name)
             damage = pokemon['move1']
             movename = pokemon['move1name']
             other.battlehealth -= damage
             print(self.playername,"attacked with",movename,"dealing",damage,"damage.")
 
         elif attacks == "2":
-            print(self.playername, "used", self.move2)
+            print(self.playername, "used", self.move2name)
             damage = pokemon['move2']
             movename = pokemon['move2name']
             other.battlehealth -= damage
             print(self.playername,"attacked with",movename,"dealing",damage,"damage.")
 
         elif attacks == "3":
-            print(self.playername, "used", self.move3)
+            print(self.playername, "used", self.move3name)
             health = pokemon['move3']
             movename = pokemon['move3name']
             self.battlehealth += health
@@ -202,18 +199,15 @@ class Enemy(Character):
         self.pokechoice = 0
         self.health = 0
         self.battlehealth = 0
-        self.move1 = 0
-        self.move2 = 0
-        self.move3 = 0
-        self.move1amount = 0
-        self.move2amount = 0
-        self.move3amount = 0
+        self.move1name = 0
+        self.move2name = 0
+        self.move3name = 0
 
     def getplayername(self):
         if multiplayer == 1:
             self.playername = "Computer"
         else:
-            self.playername = input("Player 2 enter your name. ")
+            self.playername = input("Player 2 enter your name. ".title())
 
     def getnamechoices(self):
         chardict = self.difficulty
@@ -279,16 +273,13 @@ class Enemy(Character):
         self.battlehealth = pokemon['health']
     def getmove1(self):
         pokemon = self.pokedict
-        self.move1 = pokemon['move1name']
-        self.move1amount = pokemon['move1']
+        self.move1name = pokemon['move1name']
     def getmove2(self):
         pokemon = self.pokedict
-        self.move2 = pokemon['move2name']
-        self.move2amount = pokemon['move2']
+        self.move2name = pokemon['move2name']
     def getmove3(self):
         pokemon = self.pokedict
-        self.move3 = pokemon['move3name']
-        self.move3amount = pokemon['move3']
+        self.move3name = pokemon['move3name']
 
 
     def attack(self, other):
@@ -301,38 +292,38 @@ class Enemy(Character):
 
             if self.battlehealth <= healpercent:
                 if attacks >= 65:
-                    print(self.playername, "used", self.move3)
+                    print(self.playername, "used", self.move3name)
                     health = pokemon['move3']
                     movename = pokemon['move3name']
                     self.battlehealth += health
                     print(self.playername,"used",movename,"adding",health,"health.")
                 elif attacks >= 25:
-                    print(self.playername, "used", self.move2)
+                    print(self.playername, "used", self.move2name)
                     damage = pokemon['move2']
                     movename = pokemon['move2name']
                     other.battlehealth -= damage
                     print(self.playername,"attacked with",movename,"dealing",damage,"damage.")
                 elif attacks >= 1:
-                    print(self.playername, "used", self.move1)
+                    print(self.playername, "used", self.move1name)
                     damage = pokemon['move1']
                     movename = pokemon['move1name']
                     other.battlehealth -= damage
                     print(self.playername,"attacked with",movename,"dealing",damage,"damage.")
             else:
                 if attacks >= 85:
-                    print(self.playername, "used", self.move3)
+                    print(self.playername, "used", self.move3name)
                     health = pokemon['move3']
                     movename = pokemon['move3name']
                     self.battlehealth += health
                     print(self.playername,"used",movename,"adding",health,"health.")
                 elif attacks >= 50:
-                    print(self.playername, "used", self.move2)
+                    print(self.playername, "used", self.move2name)
                     damage = pokemon['move2']
                     movename = pokemon['move2name']
                     other.battlehealth -= damage
                     print(self.playername,"attacked with",movename,"dealing",damage,"damage.")
                 elif attacks >= 1:
-                    print(self.playername, "used", self.move1)
+                    print(self.playername, "used", self.move1name)
                     damage = pokemon['move1']
                     movename = pokemon['move1name']
                     other.battlehealth -= damage
@@ -346,21 +337,21 @@ class Enemy(Character):
             attacks = str(input("Select a move: "))
 
             if attacks == "1":
-                print(self.playername, "used", self.move1)
+                print(self.playername, "used", self.move1name)
                 damage = pokemon['move1']
                 movename = pokemon['move1name']
                 other.battlehealth -= damage
                 print(self.playername,"attacked with",movename,"dealing",damage,"damage.")
 
             elif attacks == "2":
-                print(self.playername, "used", self.move2)
+                print(self.playername, "used", self.move2name)
                 damage = pokemon['move2']
                 movename = pokemon['move2name']
                 other.battlehealth -= damage
                 print(self.playername,"attacked with",movename,"dealing",damage,"damage.")
 
             elif attacks == "3":
-                print(self.playername, "used", self.move3)
+                print(self.playername, "used", self.move3name)
                 health = pokemon['move3']
                 movename = pokemon['move3name']
                 self.battlehealth += health
@@ -382,14 +373,15 @@ def battle(player, enemy):
 
 
     while player.battlehealth > 0 and enemy.battlehealth > 0:
-        time.sleep(2.0)
+        input("Hit enter to Continue. ")
         os.system("cls")
         showpokemonascii()
+        print("{0}, {1}/{2} Health - {3}, {4}/{5} Health".format(player.playername,player.battlehealth,player.health,enemy.playername,enemy.battlehealth,enemy.health))
         
         print("")
-        #displaygba()
         player.attack(enemy)
         if enemy.battlehealth <= 0:
+            print("")
             print(enemy.playername, "you have 0 health!")
             break
             
@@ -397,8 +389,8 @@ def battle(player, enemy):
         print("")
         enemy.attack(player)
         if player.battlehealth <= 0:
+            print("")
             print(player.playername, "you have 0 health!")
-
             break
 
     if player.battlehealth > 0:
@@ -435,36 +427,16 @@ def main():
 
     player.getnamechoices(),player.pokemonchoice(),player.gethealth(),player.getmove1(),player.getmove2(),player.getmove3()
     print("Starting Health: ",player.health)
-    print(player.playername,"Move 1:",player.move1,"- Move 2:",player.move2,"- Move 3:",player.move3)
+    print(player.playername,"Move 1:",player.move1name,"- Move 2:",player.move2name,"- Move 3:",player.move3name)
     print("")
 
     enemy.getplayername(),enemy.getnamechoices(),enemy.pokemonchoice(),enemy.gethealth(),enemy.getmove1(),enemy.getmove2(),enemy.getmove3()
     print("Computer starting Health: ",enemy.health)
-    print(enemy.playername,"Move 1:",enemy.move1,"- Move 2:",enemy.move2,"- Move 3:",enemy.move3)
+    print(enemy.playername,"Move 1:",enemy.move1name,"- Move 2:",enemy.move2name,"- Move 3:",enemy.move3name)
     print("")
     print("")
     print("")
     battle(player, enemy)
-
-
-def displaygba():
-    player = Player(multiplayer, difficulty)
-    enemy = Enemy(multiplayer, difficulty)
-    print(" __________________________________________")
-    print("| RIVAL {0}                                |".format(enemy.playername))#rival name
-    print("| {0}   Lv5                                |".format(enemy.pokemon))#rival pokemon
-    print("|      HP {0}/{1}                          |".format(enemy.battlehealth, enemy.health))#hp of starting hp
-    print("|                                          |")
-    print("|                                          |")
-    print("|                            {0}         |".format(player.playername))#name
-    print("|                           {0}   Lv5 |".format(player.pokemon))#pokemon
-    print("|                               HP {0}/{1} |".format(player.battlehealth, player.health))#hp of starting hp
-    print("|                                          |")
-    print("| [1] {0}   [2] {1} | PP     35/35|".format(player.move1name, player.move2name))#move1 move2
-    print("| [3] {0}                   |  type/NORMAL|".format(player.move3name))#move3
-    print("|__________________________________________|")
-
-
 
 
 if __name__ == '__main__':
