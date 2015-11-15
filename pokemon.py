@@ -92,9 +92,9 @@ class Player(Character):
 
     def getplayername(self):
         if multiplayer == 1:
-            self.playername = input("Please enter your name. ".title())
+            self.playername = input("Please enter your name. ").title()
         else:
-            self.playername = input("Player 1 enter your name. ".title())
+            self.playername = input("Player 1 enter your name. ").title()
 
     def getnamechoices(self):
         chardict = self.difficulty
@@ -162,21 +162,27 @@ class Player(Character):
 
         if attacks == "1":
             print(self.playername, "used", self.move1name)
-            damage = pokemon['move1']
+            damage1 = pokemon['move11']
+            damage2 = pokemon['move12']
+            damage = random.randint(damage1, damage2)
             movename = pokemon['move1name']
             other.battlehealth -= damage
             print(self.playername,"attacked with",movename,"dealing",damage,"damage.")
 
         elif attacks == "2":
             print(self.playername, "used", self.move2name)
-            damage = pokemon['move2']
+            damage1 = pokemon['move21']
+            damage2 = pokemon['move22']
+            damage = random.randint(damage1, damage2)
             movename = pokemon['move2name']
             other.battlehealth -= damage
             print(self.playername,"attacked with",movename,"dealing",damage,"damage.")
 
         elif attacks == "3":
             print(self.playername, "used", self.move3name)
-            health = pokemon['move3']
+            health1 = pokemon['move31']
+            health2 = pokemon['move32']
+            health = random.randint(health1, health2)
             movename = pokemon['move3name']
             self.battlehealth += health
             print(self.playername,"used",movename,"adding",health,"health.")
@@ -207,7 +213,7 @@ class Enemy(Character):
         if multiplayer == 1:
             self.playername = "Computer"
         else:
-            self.playername = input("Player 2 enter your name. ".title())
+            self.playername = input("Player 2 enter your name. ".)title()
 
     def getnamechoices(self):
         chardict = self.difficulty
@@ -293,38 +299,50 @@ class Enemy(Character):
             if self.battlehealth <= healpercent:
                 if attacks >= 65:
                     print(self.playername, "used", self.move3name)
-                    health = pokemon['move3']
+                    health1 = pokemon['move31']
+                    health2 = pokemon['move32']
+                    health = random.randint(health1, health2)
                     movename = pokemon['move3name']
                     self.battlehealth += health
                     print(self.playername,"used",movename,"adding",health,"health.")
                 elif attacks >= 25:
                     print(self.playername, "used", self.move2name)
-                    damage = pokemon['move2']
+                    damage1 = pokemon['move21']
+                    damage2 = pokemon['move22']
+                    damage = random.randint(damage1, damage2)
                     movename = pokemon['move2name']
                     other.battlehealth -= damage
                     print(self.playername,"attacked with",movename,"dealing",damage,"damage.")
                 elif attacks >= 1:
                     print(self.playername, "used", self.move1name)
-                    damage = pokemon['move1']
+                    damage1 = pokemon['move11']
+                    damage2 = pokemon['move12']
+                    damage = random.randint(damage1, damage2)
                     movename = pokemon['move1name']
                     other.battlehealth -= damage
                     print(self.playername,"attacked with",movename,"dealing",damage,"damage.")
             else:
                 if attacks >= 85:
                     print(self.playername, "used", self.move3name)
-                    health = pokemon['move3']
+                    health1 = pokemon['move31']
+                    health2 = pokemon['move32']
+                    health = random.randint(health1, health2)
                     movename = pokemon['move3name']
                     self.battlehealth += health
                     print(self.playername,"used",movename,"adding",health,"health.")
                 elif attacks >= 50:
                     print(self.playername, "used", self.move2name)
-                    damage = pokemon['move2']
+                    damage1 = pokemon['move21']
+                    damage2 = pokemon['move22']
+                    damage = random.randint(damage1, damage2)
                     movename = pokemon['move2name']
                     other.battlehealth -= damage
                     print(self.playername,"attacked with",movename,"dealing",damage,"damage.")
                 elif attacks >= 1:
                     print(self.playername, "used", self.move1name)
-                    damage = pokemon['move1']
+                    damage1 = pokemon['move11']
+                    damage2 = pokemon['move12']
+                    damage = random.randint(damage1, damage2)
                     movename = pokemon['move1name']
                     other.battlehealth -= damage
                     print(self.playername,"attacked with",movename,"dealing",damage,"damage.")
@@ -377,7 +395,9 @@ def battle(player, enemy):
         os.system("cls")
         showpokemonascii()
         print("{0}, {1}/{2} Health - {3}, {4}/{5} Health".format(player.playername,player.battlehealth,player.health,enemy.playername,enemy.battlehealth,enemy.health))
-        
+        random1 = 10
+        random2 = 30
+        print(random.randint(random1, random2))
         print("")
         player.attack(enemy)
         if enemy.battlehealth <= 0:
@@ -405,7 +425,7 @@ def battle(player, enemy):
 
 def intro():
     print("Welcome to the pokemon world.")
-    print("There are 3 difficulty levels.")
+    print("There are multiple difficulty levels.")
     print("You can face the computer or a rival.")
     print("You take turns with your opponent.")
     print("You have 3 different moves you can choose from.")
@@ -426,12 +446,12 @@ def main():
     player.getplayername()
 
     player.getnamechoices(),player.pokemonchoice(),player.gethealth(),player.getmove1(),player.getmove2(),player.getmove3()
-    print("Starting Health: ",player.health)
+    print(player.playername,"starting Health: ",player.health)
     print(player.playername,"Move 1:",player.move1name,"- Move 2:",player.move2name,"- Move 3:",player.move3name)
     print("")
 
     enemy.getplayername(),enemy.getnamechoices(),enemy.pokemonchoice(),enemy.gethealth(),enemy.getmove1(),enemy.getmove2(),enemy.getmove3()
-    print("Computer starting Health: ",enemy.health)
+    print(enemy.playername,"starting Health: ",enemy.health)
     print(enemy.playername,"Move 1:",enemy.move1name,"- Move 2:",enemy.move2name,"- Move 3:",enemy.move3name)
     print("")
     print("")
