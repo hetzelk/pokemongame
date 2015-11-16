@@ -338,28 +338,34 @@ class Enemy(Character):
 
         else:
             print(self.playername, "current health is:", self.battlehealth)
-            print("[1]", self.move1)
-            print("[2]", self.move2)
-            print("[3]", self.move3)
+            print("[1]", self.move1name)
+            print("[2]", self.move2name)
+            print("[3]", self.move3name)
             attacks = str(input("Select a move: "))
 
             if attacks == "1":
                 print(self.playername, "used", self.move1name)
-                damage = pokemon['move1']
+                damage1 = pokemon['move11']
+                damage2 = pokemon['move12']
+                damage = random.randint(damage1, damage2)
                 movename = pokemon['move1name']
                 other.battlehealth -= damage
                 print(self.playername,"attacked with",movename,"dealing",damage,"damage.")
 
             elif attacks == "2":
                 print(self.playername, "used", self.move2name)
-                damage = pokemon['move2']
+                damage1 = pokemon['move11']
+                damage2 = pokemon['move12']
+                damage = random.randint(damage1, damage2)
                 movename = pokemon['move2name']
                 other.battlehealth -= damage
                 print(self.playername,"attacked with",movename,"dealing",damage,"damage.")
 
             elif attacks == "3":
                 print(self.playername, "used", self.move3name)
-                health = pokemon['move3']
+                health1 = pokemon['move31']
+                health2 = pokemon['move32']
+                health = random.randint(health1, health2)
                 movename = pokemon['move3name']
                 self.battlehealth += health
                 print(self.playername,"used",movename,"adding",health,"health.")
