@@ -48,16 +48,6 @@ def difficulty():
         return difficulty2
     elif difchoice == "3":
         return difficulty3
-        """
-    elif difchoice == "4":
-        return difficulty2
-    elif difchoice == "5":
-        return difficulty3
-    elif difchoice == "10":
-        return difficulty2
-    elif difchoice == "100":
-        return difficulty3"""
-
     else:
         print("Please enter the right option. 1, 2, or 3? ")
         print("")
@@ -77,8 +67,8 @@ class Player(Character):
     def __init__(self, multiplayer, difficulty):
         self.playername = 0
         self.multiplayer = multiplayer
-        self.difficulty = difficulty #difficulty1, 2, 3
-        self.pokemon = 0 #set this to another variable so the computer can't select the same pokemon as the player.
+        self.difficulty = difficulty
+        self.pokemon = 0
         self.name1 = 0
         self.name2 = 0
         self.name3 = 0
@@ -187,16 +177,15 @@ class Player(Character):
             self.battlehealth += health
             print(self.playername,"used",movename,"adding",health,"health.")
 
-        else:
+        elif attacks != "1" or "2" or "3":
             print("Please enter a correct choice.")
-            return self.attack()
-
+            return self.attack(other)
 
 class Enemy(Character):
     def __init__(self, multiplayer, difficulty):
         self.playername = 0
         self.multiplayer = multiplayer
-        self.difficulty = difficulty #difficulty1, 2, 3
+        self.difficulty = difficulty
         self.pokemon = 0
         self.name1 = 0
         self.name2 = 0
@@ -213,7 +202,7 @@ class Enemy(Character):
         if multiplayer == 1:
             self.playername = "Computer"
         else:
-            self.playername = input("Player 2 enter your name. ".)title()
+            self.playername = input("Player 2 enter your name. ").title()
 
     def getnamechoices(self):
         chardict = self.difficulty
@@ -375,9 +364,9 @@ class Enemy(Character):
                 self.battlehealth += health
                 print(self.playername,"used",movename,"adding",health,"health.")
 
-            else:
+            elif attacks != "1" or "2" or "3":
                 print("Please enter a correct choice.")
-                return self.attack()
+                return self.attack(other)
 
 
 
@@ -385,7 +374,7 @@ class Enemy(Character):
 
 
 
-def battle(player, enemy):
+def startbattle(player, enemy):
     print("Rival wants to battle!")
     print("Rival sent", enemy.pokemon, "!")
 
@@ -394,10 +383,9 @@ def battle(player, enemy):
         input("Hit enter to Continue. ")
         os.system("cls")
         showpokemonascii()
+        print(player.pokemon, "                     ", enemy.pokemon)
         print("{0}, {1}/{2} Health - {3}, {4}/{5} Health".format(player.playername,player.battlehealth,player.health,enemy.playername,enemy.battlehealth,enemy.health))
-        random1 = 10
-        random2 = 30
-        print(random.randint(random1, random2))
+
         print("")
         player.attack(enemy)
         if enemy.battlehealth <= 0:
@@ -423,7 +411,7 @@ def battle(player, enemy):
         print("")
 
 
-def intro():
+def showintro():
     print("Welcome to the pokemon world.")
     print("There are multiple difficulty levels.")
     print("You can face the computer or a rival.")
@@ -438,7 +426,7 @@ def intro():
 def main():
     os.system("cls")
     showpokemonascii()
-    intro()
+    showintro()
 
     player = Player(multiplayer, difficulty)
     enemy = Enemy(multiplayer, difficulty)
@@ -456,7 +444,7 @@ def main():
     print("")
     print("")
     print("")
-    battle(player, enemy)
+    startbattle(player, enemy)
 
 
 if __name__ == '__main__':
